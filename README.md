@@ -1,4 +1,4 @@
-Role Name
+PrestaShop Role
 =========
 
 The role with which you can install a fully ready-to-work PrestaShop.
@@ -49,16 +49,14 @@ Example playbook is in root directory of repo.
     - name: Prestashop deploy
       hosts: MyServer
       become: true
-      become_user: root
+      vars_files:
+        - vars/main.yml
       roles:
-        - role: common
-        - role: php
-        - role: mysql
-        - role: apache
         - role: prestashop
 
 You can run playbook like that:
-sudo ansible-playbook -i hosts.ini --ask-pass prestashop-deploy.yml
+    
+`sudo ansible-playbook -i hosts.ini --ask-pass prestashop-deploy.yml`
 
 Troubleshooting
 -------
