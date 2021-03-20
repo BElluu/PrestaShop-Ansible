@@ -1,0 +1,9 @@
+---
+prestashop_url: 'https://github.com/PrestaShop/PrestaShop/releases/download/1.7.7.2/prestashop_1.7.7.2.zip'
+mysql_install: True
+mysql_host: 'localhost'
+mysql_user: 'root'
+mysql_user_password: 'rootpwd'
+mysql_prestashop_user: 'prestashopuser'
+mysql_prestashop_password: 'prestashoppwd'
+mysql_prestashop_db: 'prestashop'

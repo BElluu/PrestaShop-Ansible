@@ -1,0 +1,20 @@
+---
+
+- name: Download PrestaShop package
+  get_url:
+    url: "{{ prestashop_url }}"
+    dest: /var/www/html/prestashop
+
+- name: Extract PrestaShop into /var/www/html/prestashop
+  unarchive:
+    src: /var/www/html/prestashop/prestashop_1.7.7.2.zip
+    dest: /var/www/html/prestashop
+    remote_src: true
+
+- name: Change privledges to prestashop directory for apache
+  file:
+    path: /var/www/html/prestashop
+    state: directory
+    recurse: true
+    owner: www-data
+    group: www-data

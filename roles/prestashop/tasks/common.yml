@@ -1,0 +1,15 @@
+---
+
+- name: Update apt repo and cache on Ubuntu
+  apt: 
+    update_cache: true 
+    force_apt_get: true
+
+- name: Upgrade all packages on servers
+  apt: 
+    upgrade: dist
+    force_apt_get: true
+
+- name: Ensure UnZip is installed
+  apt:
+    name: unzip
