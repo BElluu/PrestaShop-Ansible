@@ -3,11 +3,11 @@
 - name: Download PrestaShop package
   get_url:
     url: "{{ prestashop_url }}"
-    dest: /var/www/html/prestashop
+    dest: /var/www/html/prestashop/prestashop_archive.zip
 
 - name: Extract PrestaShop into /var/www/html/prestashop
   unarchive:
-    src: /var/www/html/prestashop/prestashop_1.7.7.2.zip
+    src: /var/www/html/prestashop/prestashop_archive.zip
     dest: /var/www/html/prestashop
     remote_src: true
 
