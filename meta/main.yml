@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  role_name: prestashop
+  author: belluu
+  description: PrestaShop deploy for Linux
+  license: "license (MIT)"
+  min_ansible_version: 2.4

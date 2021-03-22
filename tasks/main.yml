@@ -1,4 +1,9 @@
 ---
+- include_tasks: RedHat-Setup.yml
+  when: ansible_os_family == 'RedHat'
+
+- include_tasks: Debian-Setup.yml
+  when: ansible_os_family == 'Debian'
 
 - name: Download PrestaShop package
   get_url:

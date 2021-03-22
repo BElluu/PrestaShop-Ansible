@@ -1,6 +1,0 @@
----
-  - include: common.yml
-  - include: php.yml
-  - include: apache.yml
-  - include: mysql.yml
-  - include: prestashop.yml

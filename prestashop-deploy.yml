@@ -1,8 +1,8 @@
 ---
 - name: Prestashop deploy
-  hosts: MyServer
+  hosts: all
   become: true
   vars_files:
     - vars/main.yml
   roles:
-    - role: prestashop
+    - role: belluu.prestashop

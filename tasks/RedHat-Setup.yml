@@ -1,19 +1,72 @@
 ---
+- name: Update apt repo and cache
+  yum: 
+    update_cache: true
+
+- name: Upgrade all packages on servers
+  yum: 
+    name: "*"
+    state: latest
+
+- name: Ensure UnZip is installed
+  yum:
+    name: unzip
+  state: present
+
+- name: Ensure PHP is installed
+  yum:
+    name:
+      - libapache2-mod-php7.4
+      - php7.4
+      - php7.4-common
+      - php7.4-curl
+      - php7.4-gd
+      - php7.4-imagick
+      - php7.4-mbstring
+      - php7.4-mysql
+      - php7.4-json
+      - php7.4-xsl
+      - php7.4-intl
+      - php7.4-zip
+    state: present
+
+- name: Ensure Apache WebServer is installed
+  yum:
+    name: apache2
+  state: present
+
+- name: Ensure rewrite module for apache is enabled
+  apache2_module:
+    state: present
+    name: rewrite
+
+- name: Restart Apache
+  service:
+    name:  apache2
+    state: restarted
+
+- name: Ensure directory for PrestaShop exists
+  file:
+    path: /var/www/html/prestashop
+    state: directory
+
 - name: Ensure MySQL Server and Client are installed
-  apt:
-    pkg:
+  yum:
+    name:
     - default-mysql-server
     - default-mysql-client
+    state: present
   when: "{{ mysql_install == True}}"
 
 - name: Ensure PyMySQL is installed
-  apt: 
+  yum: 
     name: python3-pymysql
+    state: present
 
 - name: Restart MySQL
-  systemd:
-    state: restarted
+  service:
     name: mysql
+    state: restarted
   when: "{{ mysql_install == True}}"
 
 - name: Ensure Database for PrestaShop is created
