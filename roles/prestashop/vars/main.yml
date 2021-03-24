@@ -3,7 +3,7 @@ prestashop_url: 'https://github.com/PrestaShop/PrestaShop/releases/download/1.7.
 mysql_install: True
 mysql_host: 'localhost'
 mysql_user: 'root'
-mysql_user_password: 'rootpwd'
+mysql_user_password: ''
 mysql_prestashop_user: 'prestashopuser'
 mysql_prestashop_password: 'prestashoppwd'
 mysql_prestashop_db: 'prestashop'

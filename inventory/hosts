@@ -1,0 +1,5 @@
+[Ubuntu]
+Ubuntu ansible_host=192.168.40.133
+
+[RedHat]
+RedHat ansible_host=192.168.40.132

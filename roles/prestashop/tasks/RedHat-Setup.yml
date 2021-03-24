@@ -1,0 +1,128 @@
+---
+
+# - name: Add EPEL repository
+#   yum_repository:
+#     name: epel
+#     description: EPEL YUM repo
+#     baseurl: https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/
+
+# - name: Remote RPM install with yum
+#   yum:
+#     name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+# - name: Update apt repo and cache
+#   yum: 
+#     update_cache: true
+
+# - name: Upgrade all packages on servers
+#   yum: 
+#     name: "*"
+#     state: latest
+
+# - name: Ensure UnZip is installed
+#   yum:
+#     name: unzip
+#     state: present
+
+# - name: Ensure PHP is installed
+#   yum:
+#     name:
+#       - php
+#       - php74
+#       - php74-php-common
+#       - php74-php-curl
+#       - php74-php-gd
+#       - php74-php-imagick
+#       - php74-php-mbstring
+#       - php74-php-mysql
+#       - php74-php-json
+#       - php74-php-xsl
+#       - php74-php-intl
+#       - php74-php-zip
+#     state: present
+
+# - name: Ensure Apache WebServer is installed
+#   yum:
+#     name: httpd
+#     state: present
+
+# - name: Ensure rewrite module for apache is enabled
+#   apache2_module:
+#     state: present
+#     name: rewrite
+
+# - name: Restart Apache
+#   service:
+#     name:  httpd
+#     state: restarted
+
+# - name: Ensure directory for PrestaShop exists
+#   file:
+#     path: /var/www/html/prestashop
+#     state: directory
+
+# - name: Ensure MySQL Server and Client are installed
+#   yum:
+#     name:
+#      - mysql
+#      - mysql-server
+#     state: present
+#   when: "{{ mysql_install == True}}"
+
+# - name: Ensure PyMySQL is installed
+#   yum: 
+#     name: python3-PyMySQL
+#     state: present
+
+# - name: Restart MySQL
+#   service:
+#     name: mysqld
+#     state: restarted
+#   when: "{{ mysql_install == True}}"
+
+# - name: Set MySQL root Password
+#   mysql_user:
+#     login_host: "{{ mysql_host }}"
+#     login_user: "{{ mysql_user }}"
+#     login_password: "{{ mysql_user_password }}"
+#     name: 'root'
+#     password: '{{ mysql_pass }}'
+#     state: present
+
+# - name: Ensure Database for PrestaShop is created
+#   mysql_db:
+#     name: "{{ mysql_prestashop_db }}"
+#     collation: utf8mb4_general_ci
+#     login_host: "{{ mysql_host }}"
+#     login_user: "{{ mysql_user }}"
+#     login_password: "{{ mysql_user_password }}"
+#     state: present
+
+# - name: Ensure user for PrestaShop database is created with privileges
+#   mysql_user:
+#     state: present
+#     name: "{{ mysql_prestashop_user }}"
+#     password: "{{ mysql_prestashop_password }}"
+#     priv: "{{ mysql_prestashop_db }}.*:ALL,GRANT"
+#     login_host: "{{ mysql_host }}"
+#     login_user: "{{ mysql_user }}"
+#     login_password: "{{ mysql_user_password }}"
+
+# - name: Download PrestaShop package
+#   get_url:
+#     url: "{{ prestashop_url }}"
+#     dest: /var/www/html/prestashop/prestashop_archive.zip
+
+- name: Extract PrestaShop into /var/www/html/prestashop
+  unarchive:
+    src: "{{ prestashop_url }}"
+    dest: /var/www/html/prestashop/
+    remote_src: true
+
+- name: Change privledges to prestashop directory for apache
+  file:
+    path: /var/www/html/prestashop
+    state: directory
+    recurse: true
+    owner: apache
+    group: apache

@@ -1,4 +1,7 @@
 ---
+
+- include_vars: vars/main.yml
+
 - include_tasks: RedHat-Setup.yml
   when: ansible_os_family == 'RedHat'
 
